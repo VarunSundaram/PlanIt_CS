@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/Jupiter_PlanIT.csproj": {}
+  },
+  "projects": {
+    "/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/Jupiter_PlanIT.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/Jupiter_PlanIT.csproj",
+        "projectName": "Jupiter_PlanIT",
+        "projectPath": "/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/Jupiter_PlanIT.csproj",
+        "packagesPath": "/Users/varunkumarsundaram/.nuget/packages/",
+        "outputPath": "/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/varunkumarsundaram/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "MSTest": {
+              "target": "Package",
+              "version": "[3.6.4, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.12.0, )"
+            },
+            "Selenium.Support": {
+              "target": "Package",
+              "version": "[4.31.0, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.31.0, )"
+            },
+            "SeleniumExtras.WaitHelpers": {
+              "target": "Package",
+              "version": "[*, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

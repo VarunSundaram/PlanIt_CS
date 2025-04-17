@@ -338,3 +338,4 @@
 /Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/bin/Debug/net9.0/WebDriver.dll
 /Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/bin/Debug/net9.0/WebDriver.Support.dll
 /Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/bin/Debug/net9.0/SeleniumExtras.WaitHelpers.dll
+/Users/varunkumarsundaram/Documents/vsundaram/PlanIt_CS/Jupiter_PlanIT/obj/Debug/net9.0/Jupiter_PlanIT.sourcelink.json

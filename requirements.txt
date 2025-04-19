@@ -1,0 +1,16 @@
+# DO NOT include azure-functions-worker in this file
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+
+azure-communication-email
+
+azure-storage-blob
+
+MSTest
+
+Selenium.WebDriver=4.31.0
+
+Selenium.Support=4.31.0
+
+SeleniumExtras.WaitHelpers

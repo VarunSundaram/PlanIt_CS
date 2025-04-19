@@ -46,12 +46,25 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: 'Resolve Selenium Dependencies Using Dotnet'
+      shell: pwsh
+      run: |
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          dotnet add package azure-functions
+          dotnet add package azure-communication-email
+          dotnet add package azure-storage-blob
+          dotnet add package MSTest
+          dotnet add package Selenium.WebDriver
+          dotnet add package Selenium.Support
+          dotnet add package SeleniumExtras.WaitHelpers
+          popd
+      
     - name: 'Resolve Project Dependencies Using Dotnet'
       shell: pwsh # For Linux, use bash
       run: |
-        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        dotnet build --configuration Release --output ./output
-        popd
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          dotnet publish Jupiter_PlanIT.sln --configuration Release --output ./output
+          popd
 
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1

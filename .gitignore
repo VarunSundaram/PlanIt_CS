@@ -92,6 +92,7 @@ ipch/
 *.vsp
 *.vspx
 *.sap
+.DS_Store
 
 # TFS 2012 Local Workspace
 $tf/

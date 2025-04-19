@@ -8,6 +8,8 @@ azure-communication-email
 
 azure-storage-blob
 
+MSTest
+
 Selenium.WebDriver=4.31.0
 
 Selenium.Support=4.31.0

@@ -63,7 +63,7 @@ jobs:
           nuget install SeleniumExtras.WaitHelpers
           nuget install NUnit.Console
           dotnet tool install NUnit.ConsoleRunner.NetCore
-          dotnet new tool-manifest
+          dotnet new tool-manifest --force
           popd
       
     - name: 'Resolve Project Dependencies Using Dotnet'

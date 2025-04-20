@@ -34,6 +34,12 @@ jobs:
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v4
+    
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Nuget Push
+      run: nuget push *.nupkg
 
     # If you want to use Azure RBAC instead of Publish Profile, then uncomment the task below
     # - name: 'Login via Azure CLI'
@@ -50,13 +56,15 @@ jobs:
       shell: pwsh
       run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          dotnet add package azure-functions
-          dotnet add package azure-communication-email
-          dotnet add package azure-storage-blob
-          dotnet add package MSTest
-          dotnet add package Selenium.WebDriver
-          dotnet add package Selenium.Support
-          dotnet add package SeleniumExtras.WaitHelpers
+          Get-Project PlanIT_Test | nuget install Microsoft.NET.Test.Sdk
+          Get-Project PlanIT_Test | nuget install NUnit
+          Get-Project PlanIT_Test | nuget install NUnit.Console
+          Get-Project PlanIT_Test | nuget install Selenium.WebDriver
+          Get-Project PlanIT_Test | nuget install Selenium.Support
+          Get-Project PlanIT_Test | nuget install SeleniumExtras.WaitHelpers
+          Get-Project PlanIT_Test | NUnit.Console
+          dotnet tool install NUnit.ConsoleRunner.NetCore
+          dotnet new tool-manifest
           popd
       
     - name: 'Resolve Project Dependencies Using Dotnet'
@@ -64,6 +72,7 @@ jobs:
       run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
+          dotnet nunit ./output/PlanIT_Test.dll 
           popd
 
     - name: 'Run Azure Functions Action'

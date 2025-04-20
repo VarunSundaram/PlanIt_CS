@@ -35,12 +35,10 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v4
     
-    - name: Set Actions Allow Unsecure Commands
-      run: |
-        echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
-    
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
     - name: Nuget Push
       run: nuget push *.nupkg

@@ -40,9 +40,6 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
-    - name: Nuget Push
-      run: nuget push *.nupkg
-
     # If you want to use Azure RBAC instead of Publish Profile, then uncomment the task below
     # - name: 'Login via Azure CLI'
     #   uses: azure/login@v1

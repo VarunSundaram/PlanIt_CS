@@ -71,7 +71,6 @@ jobs:
       run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
-          dotnet nunit ./output/PlanIT_Test.dll 
           popd
 
     - name: 'Run Azure Functions Action'

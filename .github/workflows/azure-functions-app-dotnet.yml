@@ -55,13 +55,13 @@ jobs:
       shell: pwsh
       run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-          Get-Project PlanIT_Test | nuget install Microsoft.NET.Test.Sdk
-          Get-Project PlanIT_Test | nuget install NUnit
-          Get-Project PlanIT_Test | nuget install NUnit.Console
-          Get-Project PlanIT_Test | nuget install Selenium.WebDriver
-          Get-Project PlanIT_Test | nuget install Selenium.Support
-          Get-Project PlanIT_Test | nuget install SeleniumExtras.WaitHelpers
-          Get-Project PlanIT_Test | NUnit.Console
+          nuget install Microsoft.NET.Test.Sdk
+          nuget install NUnit
+          nuget install NUnit.Console
+          nuget install Selenium.WebDriver
+          nuget install Selenium.Support
+          nuget install SeleniumExtras.WaitHelpers
+          nuget install NUnit.Console
           dotnet tool install NUnit.ConsoleRunner.NetCore
           dotnet new tool-manifest
           popd

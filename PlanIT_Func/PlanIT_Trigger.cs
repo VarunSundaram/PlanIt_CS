@@ -22,14 +22,22 @@ namespace PlanIt.Task
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             DirectoryInfo directory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            while (directory != null && !directory.GetDirectories("PlanIT_Func").Any())
+
+            if (directory != null && directory.GetFiles("PlanIT_Test.dll").Any())
             {
-                directory = directory.Parent;
+                _logger.LogInformation("Executable file is not found");
+            }
+            else
+            {
+                while (directory != null && !directory.GetFiles("PlanIT_Test.dll").Any())
+                {
+                    directory = directory.Parent;
+                }
             }
             if (directory == null)
             {
                 _logger.LogInformation("Execution folder not found");
-                return new OkObjectResult("Execution Abandoned!");
+                return new OkObjectResult("Execution Abandoned! " + Directory.GetCurrentDirectory().ToString());
             }
 
             // Create a new Process object.
@@ -44,7 +52,7 @@ namespace PlanIt.Task
             // Read the output of the process.
             string output = process.StandardOutput.ReadToEnd();
             _logger.LogInformation(output);
-            return new OkObjectResult("End of Execution");
+            return new OkObjectResult("End of Execution with " + output);
         }
     }
 }

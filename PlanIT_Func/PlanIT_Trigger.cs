@@ -25,7 +25,7 @@ namespace PlanIt.Task
 
             if (directory != null && directory.GetFiles("PlanIT_Test.dll").Any())
             {
-                _logger.LogInformation("Executable file is not found");
+                _logger.LogInformation("Executable file is found");
             }
             else
             {
@@ -39,19 +39,27 @@ namespace PlanIt.Task
                 _logger.LogInformation("Execution folder not found");
                 return new OkObjectResult("Execution Abandoned! " + Directory.GetCurrentDirectory().ToString());
             }
+            
+            string output = string.Empty;
+            try
+            {
+                // Create a new Process object.
+                Process process = new Process();
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = "dotnet nunit ./output/PlanIT_Test.dll";
+                process.StartInfo.WorkingDirectory = directory.Name;
+                // Start the process.
+                process.Start();
+                process.WaitForExit();
 
-            // Create a new Process object.
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "dotnet nunit ./output/PlanIT_Test.dll";
-            process.StartInfo.WorkingDirectory = directory.Name;
-            // Start the process.
-            process.Start();
-            process.WaitForExit();
-
-            // Read the output of the process.
-            string output = process.StandardOutput.ReadToEnd();
-            _logger.LogInformation(output);
+                // Read the output of the process.
+                output = process.StandardOutput.ReadToEnd();
+                _logger.LogInformation(output);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
             return new OkObjectResult("End of Execution with " + output);
         }
     }

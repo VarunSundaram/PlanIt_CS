@@ -9,6 +9,9 @@ namespace WebDriver
     // Initialize WebDriver
     static IWebDriver? driver = null;
 
+    /// <summary>
+    /// New driver manager instance is created for first time
+    /// </summary>
     public static IWebDriver GetWebDriver(string message)
     {
         WriteLine("Message " + message);
@@ -19,6 +22,11 @@ namespace WebDriver
         return driver;
     }
 
+    /// <summary>
+    /// Selenium WebDriver is created.
+    /// WebDriver options can be parameterized depending of the type of target platform
+    /// Target platform can be Chrome, Edge, Safari and Firefox
+    /// </summary>
     public static IWebDriver Start()
     {
         // Set Chrome options

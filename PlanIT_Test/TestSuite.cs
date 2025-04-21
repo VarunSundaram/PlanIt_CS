@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using WebDriver;
-namespace PlanIT_Test;
+namespace PlanITTest;
 
 public class Tests
 {
@@ -21,14 +21,14 @@ public class Tests
     {
         string foreName = "Test Forename";
         string surName = "Test Surname";
-        string email = "test@jupiter.com";
-        string telephone = "0491 189 190";
-        string message = "Test Message";
+        string emailId = "test@jupiter.com";
+        string teleNum = "0491 189 190";
+        string msgToContact = "Test Message";
         ContactPage.Instance.Navigate();
-        ContactPage.Instance.Click_Submit();
-        ContactPage.Instance.Verify_Warnings_Visible();
-        ContactPage.Instance.Fill_Contact_Details(foreName, surName, email, telephone, message);
-        ContactPage.Instance.Verify_Warnings_NotVisible();
+        ContactPage.Instance.ClickSubmit();
+        ContactPage.Instance.VerifyWarningsVisible();
+        ContactPage.Instance.FillContactDetail(foreName, surName, emailId, teleNum, msgToContact);
+        ContactPage.Instance.VerifyWarningsNotVisible();
     }
 
     [Test, Repeat(5), Sequential]
@@ -36,30 +36,30 @@ public class Tests
     {
         string foreName = "Test Forename";
         string surName = "Test Surname";
-        string email = "test@jupiter.com";
-        string telephone = "0491 189 190";
-        string message = "Test Message";
+        string emailId = "test@jupiter.com";
+        string teleNum = "0491 189 190";
+        string msgToContact = "Test Message";
         ContactPage.Instance.Navigate();
-        ContactPage.Instance.Fill_Contact_Details(foreName, surName, email, telephone, message);
-        ContactPage.Instance.Click_Submit();
+        ContactPage.Instance.FillContactDetail(foreName, surName, emailId, teleNum, msgToContact);
+        ContactPage.Instance.ClickSubmit();
         ContactPage.Instance.VerifySuccessfullSentMessage(foreName);
-        ContactPage.Instance.Click_Back();
+        ContactPage.Instance.ClickBack();
     }
 
     [Test]
     public void Validate_Cart_Total()
     {
         ShopPage.Instance.Navigate();
-        decimal price1 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.Stuffed_frog, 2);
-        ShopPage.Instance.Verify_Cart_Item_Count(2);
-        decimal price2 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.Fluffy_Bunny, 5);
-        ShopPage.Instance.Verify_Cart_Item_Count(7);
-        decimal price3 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.Valentine_Bear, 3);
-        ShopPage.Instance.Verify_Cart_Item_Count(10);
+        decimal price1 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.stuffedFrog, 2);
+        ShopPage.Instance.VerifyCartItemCount(2);
+        decimal price2 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.fluffyBunny, 5);
+        ShopPage.Instance.VerifyCartItemCount(7);
+        decimal price3 = ShopPage.Instance.AddItemToCart_ReturnSubTotal(ShopPage.Instance.valentineBear, 3);
+        ShopPage.Instance.VerifyCartItemCount(10);
         ShopPage.Instance.GotoCart();
-        ShopPage.Instance.Verify_Cart_Total(price1 + price2 + price3);
-        ShopPage.Instance.Verify_SubTotal_Total(ShopPage.Instance.Stuffed_frog, price1);
-        ShopPage.Instance.Verify_SubTotal_Total(ShopPage.Instance.Fluffy_Bunny, price2);
-        ShopPage.Instance.Verify_SubTotal_Total(ShopPage.Instance.Valentine_Bear, price3);
+        ShopPage.Instance.VerifyCartTotal(price1 + price2 + price3);
+        ShopPage.Instance.VerifyCartSubTotal(ShopPage.Instance.stuffedFrog, price1);
+        ShopPage.Instance.VerifyCartSubTotal(ShopPage.Instance.fluffyBunny, price2);
+        ShopPage.Instance.VerifyCartSubTotal(ShopPage.Instance.valentineBear, price3);
     }
 }

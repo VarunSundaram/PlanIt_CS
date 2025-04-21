@@ -24,35 +24,35 @@ namespace WebDriver
     }
 
     By Shop = By.XPath("//a[text()='Shop']");
-    public string Stuffed_frog
+    public string stuffedFrog
     {
         get
         {
             return "Stuffed Frog";
         }
     }
-    public string Handmade_Doll
+    public string handmadeDoll
     {
         get
         {
             return "Handmade Doll";
         }
     }
-    public string Fluffy_Bunny
+    public string fluffyBunny
     {
         get
         {
             return "Fluffy Bunny";
         }
     }
-    public string Smiley_Bear
+    public string smileyBear
     {
         get
         {
             return "Smiley Bear";
         }
     }
-    public string Valentine_Bear
+    public string valentineBear
     {
         get
         {
@@ -66,10 +66,19 @@ namespace WebDriver
     By txtTotalPrice = By.XPath("//*[contains(text(),'Total: ')]");
     string txtSubTotal = "//td[contains(text(),'__ITEM_NAME__')]//parent::tr//td[4]";
 
+    /// <summary>
+    /// This method navigate application to Shop page
+    /// </summary>
     public void Navigate()
     {
         ReturnElement(Shop).Click();
     }
+
+    /// <summary>
+    /// This method add Item to the card minimum one time. Then returns the sub total price
+    /// </summary>
+    /// <param name="itemName">item name</param>
+    /// <param name="count">N times the item must be added</param>
     public decimal AddItemToCart_ReturnSubTotal(string itemName, int count = 1)
     {
         decimal price = 0;
@@ -86,21 +95,40 @@ namespace WebDriver
         }while(count > 0);
         return price;
     }
-    public void Verify_Cart_Item_Count(int expectedCount)
+    /// <summary>
+    /// This method verifies count of items in the cart
+    /// </summary>
+    /// <param name="expectedCount">expected count to be verified</param>
+    public void VerifyCartItemCount(int expectedCount)
     {
         int count = int.Parse(ReturnElement(txtItemsCartCount).Text);
         Assert.That(count==expectedCount, "Expected Item count in the cart is not matching");
     }
+
+    /// <summary>
+    /// This method navigates to aplication to Cart Page
+    /// </summary>
     public void GotoCart()
     {
         ReturnElement(txtItemsCartCount).Click();
     }
-    public void Verify_Cart_Total(decimal expectedTotal)
+
+    /// <summary>
+    /// This method verifies the total price in the cart
+    /// </summary>
+    /// <param name="expectedTotal">expected total to be verified</param>
+    public void VerifyCartTotal(decimal expectedTotal)
     {
         string total = ReturnElement(txtTotalPrice).Text;
         Assert.That(total.Contains(expectedTotal.ToString("#.#")), "Expected Price in the cart is not matching");
     }
-    public void Verify_SubTotal_Total(string itemName, decimal expectedSubTotal)
+
+    /// <summary>
+    /// This method verifies sub total price of given item
+    /// </summary>
+    /// <param name="itemName">item name to which sub total should be verified</param>
+    /// <param name="expectedSubTotal">expected total to be verified</param>
+    public void VerifyCartSubTotal(string itemName, decimal expectedSubTotal)
     {
         By item = By.XPath(txtSubTotal.Replace("__ITEM_NAME__", itemName));
         string subTotal = ReturnElement(item).Text;

@@ -45,8 +45,8 @@ namespace PlanIt.Task
             {
                 // Create a new Process object.
                 Process process = new Process();
-                process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = "dotnet nunit ./output/PlanIT_Test.dll";
+                process.StartInfo.FileName = "dotnet";
+                process.StartInfo.Arguments = "nunit ./output/PlanIT_Test.dll";
                 process.StartInfo.WorkingDirectory = directory.Name;
                 // Start the process.
                 process.Start();

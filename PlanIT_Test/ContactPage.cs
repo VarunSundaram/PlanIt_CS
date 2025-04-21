@@ -24,58 +24,86 @@ namespace WebDriver
 
     By Contact = By.XPath("//a[text()='Contact']");
     By Submit = By.XPath("//a[text()='Submit']");
-    By Forename_warning = By.XPath("//span[text()='Forename is required']");
-    By Email_warning = By.XPath("//span[text()='Email is required']");
-    By Message_warning = By.XPath("//span[text()='Message is required']");
+    By forenameWarning = By.XPath("//span[text()='Forename is required']");
+    By emailWarning = By.XPath("//span[text()='Email is required']");
+    By messageWarning = By.XPath("//span[text()='Message is required']");
 
-    By txtForename = By.Id("forename");
-    By txtSurname = By.Id("surname");
-    By txtEmail = By.Id("email");
-    By txtTelephone = By.Id("telephone");
-    By txtMessage = By.Id("message"); 
-    string txtAppreciate = "//*[contains(text(), 'Thanks __NAME__')]";
-    By btnBack = By.XPath("//a[contains(text(),'Back')]");
-    By txtSending = By.XPath("//*[contains(text(), 'Sending Feedback')]");
+    By userForename = By.Id("forename");
+    By userSurname = By.Id("surname");
+    By userEmail = By.Id("email");
+    By userTelephone = By.Id("telephone");
+    By userMessage = By.Id("message"); 
+    string appreciateNotify = "//*[contains(text(), 'Thanks __NAME__')]";
+    By backButton = By.XPath("//a[contains(text(),'Back')]");
+    By sendingFeedback = By.XPath("//*[contains(text(), 'Sending Feedback')]");
 
+    /// <summary>
+    /// This method navigates application to Contact page
+    /// </summary>
     public void Navigate()
     {
         ReturnElement(Contact).Click();
     }
 
-    public void Verify_Warnings_Visible()
+    /// <summary>
+    /// This method verifies the warnings that must be visible in the form
+    /// </summary>
+    public void VerifyWarningsVisible()
     {
-        Assert.That(IsElementExists(Forename_warning), "Warning is not visible");
-        Assert.That(IsElementExists(Email_warning), "Warning is not visible");
-        Assert.That(IsElementExists(Message_warning), "Warning is not visible");
+        Assert.That(IsElementExists(forenameWarning), "Warning is not visible");
+        Assert.That(IsElementExists(emailWarning), "Warning is not visible");
+        Assert.That(IsElementExists(messageWarning), "Warning is not visible");
     }
 
-    public void Verify_Warnings_NotVisible()
+    /// <summary>
+    /// This method verifies the warning that must not be visible in the form
+    /// </summary>
+    public void VerifyWarningsNotVisible()
     {
-        Assert.That(!IsElementExists(Forename_warning), "Forename Warning is visible");
-        Assert.That(!IsElementExists(Email_warning), "Email Warning is visible");
-        Assert.That(!IsElementExists(Message_warning), "Message Warning is visible");
+        Assert.That(!IsElementExists(forenameWarning), "Forename Warning is visible");
+        Assert.That(!IsElementExists(emailWarning), "Email Warning is visible");
+        Assert.That(!IsElementExists(messageWarning), "Message Warning is visible");
     }
 
-    public void Fill_Contact_Details(string foreName, string surName, string email, string telephone, string message)
+    /// <summary>
+    /// This method fill contact details of user
+    /// </summary>
+    /// <param name="foreName">Forename of user</param>
+    /// <param name="surName">Surname of user</param>
+    /// <param name="emailId">Email Id of user</param>
+    /// <param name="teleNumber">Telephone number of user</param>
+    /// <param name="msgToContact">Message from user</param>
+    public void FillContactDetail(string foreName, string surName, string emailId, string teleNumber, string msgToContact)
     {
-        SetText(txtForename, foreName);
-        SetText(txtSurname, surName);
-        SetText(txtEmail, email);
-        SetText(txtTelephone, telephone);
-        SetText(txtMessage, message);
+        SetText(userForename, foreName);
+        SetText(userSurname, surName);
+        SetText(userEmail, emailId);
+        SetText(userTelephone, teleNumber);
+        SetText(userMessage, msgToContact);
     }
 
-    public void Click_Submit()
+    /// <summary>
+    /// Submit the form
+    /// </summary>
+    public void ClickSubmit()
     {
         ReturnElement(Submit).Click();
     }
-    public void Click_Back()
+
+    /// <summary>
+    /// Navigate back
+    /// </summary>
+    public void ClickBack()
     {
-        ReturnElement(btnBack).Click();
+        ReturnElement(backButton).Click();
     }
+
+    /// <summary>
+    /// Verify feedback submit message for given user
+    /// </summary>
     public void VerifySuccessfullSentMessage(string foreName)
     {
-      By by = By.XPath(txtAppreciate.Replace("__NAME__", foreName));
+      By by = By.XPath(appreciateNotify.Replace("__NAME__", foreName));
       WaitForElement(by, 40);
     }
   }

@@ -25,6 +25,9 @@ namespace WebDriver
 
     By Home = By.XPath("//a[text()='Home']");
 
+    /// <summary>
+    /// Navigate to Home page
+    /// </summary>
     public void Navigate()
     {
         ReturnElement(Home).Click();

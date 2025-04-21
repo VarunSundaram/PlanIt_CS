@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.IO;
 
 namespace PlanIt.Task
 {
@@ -18,8 +20,31 @@ namespace PlanIt.Task
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            // # dotnet nunit ./output/PlanIT_Test.dll 
-            return new OkObjectResult("Welcome to Azure Functions!");
+
+            DirectoryInfo directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            while (directory != null && !directory.GetDirectories("PlanIT_Func").Any())
+            {
+                directory = directory.Parent;
+            }
+            if (directory == null)
+            {
+                _logger.LogInformation("Execution folder not found");
+                return new OkObjectResult("Execution Abandoned!");
+            }
+
+            // Create a new Process object.
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = "dotnet nunit ./output/PlanIT_Test.dll";
+            process.StartInfo.WorkingDirectory = directory.Name;
+            // Start the process.
+            process.Start();
+            process.WaitForExit();
+
+            // Read the output of the process.
+            string output = process.StandardOutput.ReadToEnd();
+            _logger.LogInformation(output);
+            return new OkObjectResult("End of Execution");
         }
     }
 }
